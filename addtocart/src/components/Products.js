@@ -15,7 +15,7 @@ export default function Products(props)  {
                        </a>
                        <div className="product-price">
                          <div>
-                             {`$${product.price}`}
+                             {`Rs. ${product.price}`}
                          </div>
                          <button className="button primary">
                              Add To Cart

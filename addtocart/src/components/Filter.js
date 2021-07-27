@@ -1,22 +1,22 @@
 import React from 'react'
 
-export default function Filter(props) {
+export default function Filter({count,size,sort,sortProducts,filterProducts}) {
     return (
         <div className="filter"> 
           <div className="filter-result">
-            {props.count} Products
+            {count} Products
           </div>
           <div className="filter-sort">
-            Order
-            <select>
+            Order {" "}
+            <select  onChange={sortProducts}>
                 <option>Latest</option>
                 <option value="lowest">Lowest</option>
                 <option value="highst">Highest</option>
             </select>
           </div>
           <div className="filter-size">
-               Filter
-               <select>
+               Filter {""}
+               <select  onChange={filterProducts}>
                    <option value="ALL">ALL</option>
                    <option value="XS">XS</option>
                    <option value="S">S</option>
@@ -30,3 +30,4 @@ export default function Filter(props) {
         </div>
     )
 }
+// value={size}

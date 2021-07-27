@@ -12,12 +12,20 @@ function App() {
     size: "",
     sort: "",
   });
- 
-  const filterProducts =(size)=>{
 
+  const filterProducts = (e) => {
+    if (e.target.value === "") {
+      setState({ ...state,[e.target.name]: e.target.value, product: data.products });
+    }
+    else {
+      setState({
+        ...state, [e.target.name]: e.target.value,
+        [e.target.name]: data.products.filter((p) => p.availableSizes.indexOf(e.target.value) >= 0),
+      });
+    }
   }
-  const sortProducts = (sort)=>{
-    
+  const sortProducts = (e) => {
+    // setState({...state,[e.target.name]:e.target.value});
   }
 
   return (
@@ -28,10 +36,14 @@ function App() {
       <main>
         <div className="content">
           <div className="main">
-          <Filter count={state.products.length} size={state.size} sort={state.sort}
-            filterProducts={filterProducts} sortProducts={sortProducts}
-          />
-           <Products products={state.products}/>
+            <Filter
+              count={state.products.length}
+              size={state.size}
+              sort={state.sort}
+              filterProducts={filterProducts}
+              sortProducts={sortProducts}
+            />
+            <Products products={state.products} />
           </div>
           <div className="sidebar">
             Cart Items

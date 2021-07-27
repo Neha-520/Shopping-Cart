@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.cdm/css2?family=Montserrat&display=swap");
+
 html{
   font-size: 62.5%;
   box-sizing: border-box;
@@ -121,4 +121,13 @@ background-color: aquamarine;
  }
  .filter div{
    flex:1;
+ }
+ .cart{
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  
+ }
+ .cart-header{
+  border-bottom: 0.1rem #c0c0c0 solid;
  }

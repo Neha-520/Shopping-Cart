@@ -3,29 +3,53 @@ import React, { useState } from "react";
 import Filter from "./components/Filter";
 import Products from "./components/Products";
 import data from "./data.json"
+import Cart from "./components/Cart";
 
 
 function App() {
 
   const [state, setState] = useState({
     products: data.products,
-    size: "",
-    sort: "",
+    size: "ALL",
+    sort: "Latest",
   });
+  const [cartItems,setcartItems] = useState([]);
+
+const addToCart = (product)=>{
+const cartItem = cartItems.slice();
+let alreadyInCart = false
+cartItem.forEach(item=>{
+  if(item._id === product._id){
+  item.count++;
+  alreadyInCart = true;
+  }
+})
+if(!alreadyInCart)
+{
+  cartItem.push({count: 1});
+}
+setcartItems(cartItem)
+};
 
   const filterProducts = (e) => {
+    console.log(e.target.value);
     if (e.target.value === "") {
-      setState({ ...state,[e.target.name]: e.target.value, product: data.products });
+      setState({ ...state,[e.target.name]: e.target.value});
     }
     else {
       setState({
-        ...state, [e.target.name]: e.target.value,
-        [e.target.name]: data.products.filter((p) => p.availableSizes.indexOf(e.target.value) >= 0),
+        ...state,
+        [e.target.name]: 
+        data.products.filter((p) => p.availableSizes.indexOf(e.target.value) >= 0),
       });
     }
+    console.log(state);
   }
   const sortProducts = (e) => {
-    // setState({...state,[e.target.name]:e.target.value});
+ 
+    setState({
+      ...state, [e.target.name]: e.target.value
+    });
   }
 
   return (
@@ -43,10 +67,10 @@ function App() {
               filterProducts={filterProducts}
               sortProducts={sortProducts}
             />
-            <Products products={state.products} />
+            <Products products={state.products} addToCart={addToCart} />
           </div>
           <div className="sidebar">
-            Cart Items
+            <Cart cartItems={cartItems}/>
           </div>
         </div>
       </main>

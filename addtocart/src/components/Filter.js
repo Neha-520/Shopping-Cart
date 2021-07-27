@@ -8,15 +8,15 @@ export default function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
           <div className="filter-sort">
             Order {" "}
-            <select  onChange={sortProducts}>
-                <option>Latest</option>
+            <select value={sort} onChange={sortProducts}>
+                <option value="latest">Latest</option>
                 <option value="lowest">Lowest</option>
                 <option value="highst">Highest</option>
             </select>
           </div>
           <div className="filter-size">
                Filter {""}
-               <select  onChange={filterProducts}>
+               <select value={size} onChange={filterProducts}>
                    <option value="ALL">ALL</option>
                    <option value="XS">XS</option>
                    <option value="S">S</option>

@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import Filter from "./components/Filter";
 import Products from "./components/Products";
 import data from "./data.json"
 
@@ -11,6 +12,13 @@ function App() {
     size: "",
     sort: "",
   });
+ 
+  const filterProducts =(size)=>{
+
+  }
+  const sortProducts = (sort)=>{
+    
+  }
 
   return (
     <div className="grid-container">
@@ -20,6 +28,9 @@ function App() {
       <main>
         <div className="content">
           <div className="main">
+          <Filter count={state.products.length} size={state.size} sort={state.sort}
+            filterProducts={filterProducts} sortProducts={sortProducts}
+          />
            <Products products={state.products}/>
           </div>
           <div className="sidebar">

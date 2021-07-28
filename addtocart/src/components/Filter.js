@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Filter({count,size,sort,sortProducts,filterProducts}) {
+  console.log(size);
     return (
         <div className="filter"> 
           <div className="filter-result">
@@ -8,7 +9,7 @@ export default function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
           <div className="filter-sort">
             Order {" "}
-            <select value={sort} onChange={sortProducts}>
+            <select value={sort} name="sort" onChange={sortProducts}>
                 <option value="latest">Latest</option>
                 <option value="lowest">Lowest</option>
                 <option value="highst">Highest</option>
@@ -16,7 +17,7 @@ export default function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
           <div className="filter-size">
                Filter {""}
-               <select value={size} onChange={filterProducts}>
+               <select value={size} name="size" onChange={filterProducts}>
                    <option value="ALL">ALL</option>
                    <option value="XS">XS</option>
                    <option value="S">S</option>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Cart ({cartItems,removeFromCart})
 {
- 
+ console.log(cartItems);
     return (
         <>
         <div>

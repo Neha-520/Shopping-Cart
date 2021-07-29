@@ -12,13 +12,13 @@ export default function Filter({count,size,sort,sortProducts,filterProducts}) {
             <select value={sort} name="sort" onChange={sortProducts}>
                 <option value="latest">Latest</option>
                 <option value="lowest">Lowest</option>
-                <option value="highst">Highest</option>
+                <option value="highest">Highest</option>
             </select>
           </div>
           <div className="filter-size">
                Filter {""}
                <select value={size} name="size" onChange={filterProducts}>
-                   <option value="ALL">ALL</option>
+                   <option value="">ALL</option>
                    <option value="XS">XS</option>
                    <option value="S">S</option>
                    <option value="M">M</option>

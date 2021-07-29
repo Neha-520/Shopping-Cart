@@ -4,20 +4,21 @@ export default function Products(props)  {
     return (
         <div>
            <ul className="products">
-             {props.products.map(product =>(
-                 <li key={product._id}>
+             {
+                 props.products.map(p =>(
+                 <li key={p._id}>
                      <div className="product">
-                       <a href={"# "+ product._id}>
-                           <img src={product.image} alt={product.title}/>
+                       <a href={"# "+ p._id}>
+                           <img src={p.image} alt={p.title}/>
                        <p>
-                           {product.title}
+                           {p.title}
                        </p>
                        </a>
                        <div className="product-price">
                          <div>
-                             {`Rs. ${product.price}`}
+                             {`Rs. ${p.price}`}
                          </div>
-                         <button onClick={() =>props.addToCart(product)} className="button primary">
+                         <button onClick={() =>props.addToCart(p)} className="button primary">
                              Add To Cart
                          </button>
                        </div>

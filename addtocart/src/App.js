@@ -18,21 +18,26 @@ class App extends React.Component{
     };
   }
 
-
+removeFromCart =(product) =>{
+  const cartItems = this.state.cartItems.slice();
+  this.setState({
+  cartItems:cartItems.filter(x => x._id !== product._id),
+  });
+}
 
  addToCart = (product) => {
-    const cartItem = this.state.cartItems.slice();
-    let alreadyInCart = false
-    cartItem.forEach(item => {
+    const cartItems = this.state.cartItems.slice();
+    let alreadyInCart = false;
+    cartItems.forEach(item => {
       if (item._id === product._id) {
         item.count++;
         alreadyInCart = true;
       }
     })
     if (!alreadyInCart) {
-      cartItem.push({ count: 1 });
+      cartItems.push({...product,count: 1 });
     }
-   this.setState({cartItems:cartItem});
+   this.setState({cartItems:cartItems});
   };
 
  filterProducts = (e) => {
@@ -78,10 +83,10 @@ this.setState((state)=>({
               filterProducts={this.filterProducts}
               sortProducts={this.sortProducts}
             />
-            <Products products={this.state.products} addToCart={()=>this.addToCart(this.state.products)} />
+            <Products products={this.state.products} addToCart={this.addToCart} />
           </div>
           <div className="sidebar">
-            <Cart cartItems={this.state.cartItems} />
+            <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart}/>
           </div>
         </div>
       </main>

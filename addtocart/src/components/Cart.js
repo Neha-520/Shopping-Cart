@@ -3,8 +3,24 @@ import React, { useState } from 'react'
 export default function Cart(props) {
   // console.log(props.cartItems);
   const [state, setState] = useState({
+    name:"",
+    email:"",
+    address:"",
     showCheckout: false,
   })
+  const handleInput =(e)=>{
+   setState({ [e.target.name] : e.target.value });
+  }
+  const createOrder =(e)=>{
+    e.preventDefault();
+    const order={
+      name:state.name,
+      email:state.email,
+      address:state.address,
+      cartItems: props.cartItems,
+    };
+    props.createOrder(order);
+  }
   return (
     <>
       <div>
@@ -40,20 +56,38 @@ export default function Cart(props) {
           </ul>
         </div>
         {props.cartItems.length !== 0 && (
+          <div>
           <div className="cart">
             <div className="total">
               Total:{` Rs `}
               {props.cartItems.reduce((a, c) => a + c.price * c.count, 0)}
             </div>
-            <button onClick={() => { setState({ showCheckout: true }) }} className="button primary"> Proceed</button>
+            <button onClick={() => { setState({...state,showCheckout: true }) }} className="button primary"> Proceed</button>
           </div>
-           /* {state.showCheckout && (
+            {state.showCheckout && (
           <div className="cart">
             <form onSubmit={createOrder}>
-
+              <ul className="form-container">
+                <li>
+                  <label>Email</label>
+                  <input name="email" type="email" required onChange={handleInput}></input>
+                </li>
+                <li>
+                  <label>Name</label>
+                  <input name="name" type="text" required onChange={handleInput}></input>
+                </li>
+                <li>
+                  <label>Address</label>
+                  <input  name="address"type="text" required onChange={handleInput}></input>
+                </li>
+                <li>
+                  <button className="button primary" type="submit">Checkout</button>
+                </li>
+              </ul>
             </form>
           </div>
-        )} */
+        )} 
+        </div>
            )}
       </div>
 

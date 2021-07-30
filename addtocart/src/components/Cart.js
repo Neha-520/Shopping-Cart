@@ -9,7 +9,7 @@ export default function Cart(props) {
     showCheckout: false,
   })
   const handleInput =(e)=>{
-   setState({ [e.target.name] : e.target.value });
+    setState({ ...state, [e.target.name]: e.target.value })
   }
   const createOrder =(e)=>{
     e.preventDefault();

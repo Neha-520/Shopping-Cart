@@ -9,9 +9,9 @@ const [state, setstate] = useState({
     product: null,
 });
 
-useEffect((props) => {
+useEffect(() => {
  props.fetchProducts();
-}, [])
+}, [props.products]);
 
 const openModal = (product) =>{
   setstate({product});
@@ -22,6 +22,10 @@ const closeModal =()=>{
 
     return (
         <div>
+        {
+            !props.products ? (
+                <div> Loading...</div> 
+                ) :(
            <ul className="products">
              {
                  props.products.map(p =>(
@@ -45,6 +49,8 @@ const closeModal =()=>{
                  </li>
              ))}
            </ul> 
+                )}
+           
            { state.product && (
              <Modal isOpen={true} onRequestClose={closeModal}>
                 <Zoom>
@@ -83,6 +89,7 @@ const closeModal =()=>{
              </Modal>
            )
            }
+           
         </div>
     )
 }

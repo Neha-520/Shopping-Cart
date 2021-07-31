@@ -6,9 +6,11 @@ export const fetchProducts = () => async (dispatch) =>{
 
     //dispatching an action
   const res = await fetch("/api/products"); //data from our server
+  const data = await res.json();
   //dispatching the products as action
+
   dispatch({
       type: FETCH_PRODUCTS,
-      payload : res.data,
+      payload : data,
   })
 }

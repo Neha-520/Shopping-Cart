@@ -1,11 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { filterProducts, sortProducts } from '../actions/productActions';
 
-export default function Filter({count,size,sort,sortProducts,filterProducts}) {
+function Filter({count,size,sort,sortProducts,filterProducts}) {
   console.log(size);
     return (
+      !props.filteredProducts? (
+        <div>Loading...</div>
+      ) :(
         <div className="filter"> 
           <div className="filter-result">
-            {count} Products
+            {props.filteredProducts.length} Products
           </div>
           <div className="filter-sort">
             Order {" "}
@@ -29,6 +34,17 @@ export default function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
             
         </div>
+      )
     )
 }
 // value={size}
+export default connect((state) => ({
+  size: state.products.size,
+  sort: state.products.sort,
+  products: state.products.items,
+  filteredProducts: state.products.filteredItems,
+}),{
+filterProducts,
+sortProducts,
+}
+)(Filter);

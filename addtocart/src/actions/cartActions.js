@@ -1,4 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
+import store from "../store";
 
 export const addToCart =(product) => (dispatch,getState) =>{
 const cartItems = getState().cart.cartItems.slice();
@@ -22,7 +23,7 @@ localStorage.setItem("cartItems",JSON.stringify(cartItems));
 }
 
 export const removeFromCart = (product) => (dispatch,getState) =>{
-    const cartItems = getState().cart.cartItems.slice().filter(
+    const cartItems = store.getState().cart.cartItems.slice().filter(
         (x)=> x._id !== product._id
     );
   dispatch({

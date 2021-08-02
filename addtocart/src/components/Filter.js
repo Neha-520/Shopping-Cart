@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { filterProducts, sortProducts } from '../actions/productActions';
 
-function Filter({count,size,sort,sortProducts,filterProducts}) {
-  console.log(size);
+function Filter(props) {
+  // console.log(size);
     return (
       !props.filteredProducts? (
         <div>Loading...</div>
@@ -14,7 +14,7 @@ function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
           <div className="filter-sort">
             Order {" "}
-            <select value={sort} name="sort" onChange={sortProducts}>
+            <select value={props.sort} name="sort" onChange={(e) => props.sortProducts(props.filteredProducts, e.target.value)}>
                 <option value="latest">Latest</option>
                 <option value="lowest">Lowest</option>
                 <option value="highest">Highest</option>
@@ -22,7 +22,7 @@ function Filter({count,size,sort,sortProducts,filterProducts}) {
           </div>
           <div className="filter-size">
                Filter {""}
-               <select value={size} name="size" onChange={filterProducts}>
+               <select value={props.size} name="size" onChange={(e) => props.filterProducts(props.products,e.target.value)}>
                    <option value="">ALL</option>
                    <option value="XS">XS</option>
                    <option value="S">S</option>
@@ -38,6 +38,7 @@ function Filter({count,size,sort,sortProducts,filterProducts}) {
     )
 }
 // value={size}
+//mapping state to store
 export default connect((state) => ({
   size: state.products.size,
   sort: state.products.sort,

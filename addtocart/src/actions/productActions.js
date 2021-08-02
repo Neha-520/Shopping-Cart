@@ -1,4 +1,4 @@
-import Products from "../components/Products";
+
 import { FETCH_PRODUCTS, FILTER_PRODUCTS_BY_SIZE, ORDER_PRODUCTS_BY_PRICE } from "../types";
 
 //get list of all products
@@ -30,12 +30,12 @@ export const filterProducts = (products, size) => (dispatch) => {
 }
 export const sortProducts = (filteredProducts, sort) => (dispatch) => {
   const sortedProducts = filteredProducts.slice();
-  if (sort === "") {
-    sortProducts.sort((a, b) => (a._id > b._id ? 1 : -1));
+  if (sort === "latest") {
+    sortedProducts.sort((a, b) => (a._id > b._id ? 1 : -1));
   }
   else {
-    sortProducts.sort((a, b) => (
-      sort === "lowestprice" ? a.price > b.price ? 1 : -1
+    sortedProducts.sort((a, b) => (
+      sort === "lowest" ? a.price > b.price ? 1 : -1
         : a.price > b.price ? -1 : 1
     ));
   }

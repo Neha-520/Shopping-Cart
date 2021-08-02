@@ -11,7 +11,8 @@ const [state, setstate] = useState({
 
 useEffect(() => {
  props.fetchProducts();
-}, [props.products]);
+ 
+},[]);
 
 const openModal = (product) =>{
   setstate({product});
@@ -21,11 +22,12 @@ const closeModal =()=>{
 };
 
     return (
+        <>
         <div>
-        {
-            !props.products ? (
+        
+            {!props.products ? (
                 <div> Loading...</div> 
-                ) :(
+                ) :( 
            <ul className="products">
              {
                  props.products.map(p =>(
@@ -49,7 +51,7 @@ const closeModal =()=>{
                  </li>
              ))}
            </ul> 
-                )}
+           )}      
            
            { state.product && (
              <Modal isOpen={true} onRequestClose={closeModal}>
@@ -87,14 +89,17 @@ const closeModal =()=>{
                  </div>
                  </Zoom>
              </Modal>
-           )
-           }
-           
+            )} 
         </div>
+        </>
     )
 }
 //1st param is function that accept state and return an object that define which part of redux state we r going to use
 //2nd param is the list of action we are going to use
 //connect function itself return other function and the param  it accepts is name of component we r going to connect
-export default  connect((state) => ({ products: state.products.items}),
-{fetchProducts})(Products);
+export default connect(
+(state) => ({ products: state.products.filteredItems}),
+{
+    fetchProducts,
+}
+)(Products);

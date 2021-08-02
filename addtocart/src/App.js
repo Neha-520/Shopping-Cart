@@ -7,7 +7,8 @@ import Cart from "./components/Cart";
 import store from "./store";
 import { Provider } from "react-redux";
 
-class App extends React.Component{
+function App(){
+
   // constructor(props){
   //   super(props);
   //   this.state={
@@ -72,7 +73,7 @@ class App extends React.Component{
 //    )),
 //   }));
 //   };
-  render(){
+
   return (
     <Provider store={store}>
     <div className="grid-container">
@@ -97,5 +98,5 @@ class App extends React.Component{
     </Provider>
   );
 }
-}
+
 export default App;

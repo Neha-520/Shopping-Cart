@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { removeFromCart } from '../actions/cartActions'
 
-export default function Cart(props) {
+function Cart(props) {
   // console.log(props.cartItems);
   const [state, setState] = useState({
     name:"",
@@ -94,3 +96,9 @@ export default function Cart(props) {
     </>
   )
 }
+
+export default connect((state) =>({
+  cartItems: state.cart.cartItems,
+}),
+removeFromCart
+)(Cart);

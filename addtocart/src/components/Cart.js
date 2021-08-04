@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import Modal from "react-modal"
+import Zoom from 'react-reveal/Zoom'
 import { removeFromCart } from '../actions/cartActions'
+import {createOrder,clearOrder} from '../actions/orderActions'
 
 function Cart(props) {
   // console.log(props.cartItems);
@@ -10,9 +13,11 @@ function Cart(props) {
     address:"",
     showCheckout: false,
   })
+
   const handleInput =(e)=>{
     setState({ ...state, [e.target.name]: e.target.value })
   }
+
   const createOrder =(e)=>{
     e.preventDefault();
     const order={
@@ -20,9 +25,15 @@ function Cart(props) {
       email:state.email,
       address:state.address,
       cartItems: props.cartItems,
+      total: props.cartItems.reduce((a,c) => a + c.price * c.count,0),
     };
     props.createOrder(order);
   }
+
+  const closeModal = () => {
+    props.clearOrder();
+  };
+
   return (
     <>
       <div>
@@ -33,6 +44,48 @@ function Cart(props) {
             You have {props.cartItems.length} in the cart{" "}
           </div>
         )}
+        {
+          props.order && 
+          <Modal isOpen ={true}
+          onRequestClose ={closeModal}
+          >
+            <Zoom>
+              <button className =" close-modal" onClick={closeModal}>x</button>
+              <div className="order-details">
+                <h3 className="success-message">Your order has been placed.</h3>
+                <h2>Order {props.order._id}</h2>
+                <ul>
+                  <li>
+                    <div>Name:</div>
+                    <div>{props.order.name}</div>
+                  </li>
+                  <li>
+                    <div>Email:</div>
+                    <div>{props.order.email}</div>
+                  </li>
+                  <li>
+                    <div>Address:</div>
+                    <div>{props.order.address}</div>
+                  </li>
+                  <li>
+                    <div>Total:</div>
+                    <div>{`Rs. ${props.order.total}`}</div>
+                  </li>
+                  <li>
+                    <div>Cart Items:</div>
+                    <div>
+                    {props.order.cartItems.map((x) =>(
+                      <div>
+                       {x.count} {" x "} {x.title}
+                      </div>
+                    ))}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </Zoom>
+          </Modal>
+        }
       </div>
       <div>
         <div className="cart">
@@ -98,7 +151,8 @@ function Cart(props) {
 }
 
 export default connect((state) =>({
+  order: state.order.order,
   cartItems: state.cart.cartItems,
-}),{
-removeFromCart,
-})(Cart);
+}),
+{removeFromCart,createOrder,clearOrder})
+(Cart);

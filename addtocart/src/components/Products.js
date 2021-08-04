@@ -13,7 +13,7 @@ const [state, setstate] = useState({
 useEffect(() => {
  props.fetchProducts();
  
-},[]);
+},[props]);
 
 const openModal = (product) =>{
   setstate({product});

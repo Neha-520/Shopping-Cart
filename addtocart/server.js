@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const shortId = require("shortId");
 
 const app = express(); //created webserver using express by running express as function
-app.use(bodyParser.json()); //used to parse post requests
-
+// app.use(bodyParser.json()); //used to parse post requests
+app.use(express.json());
 //initialized mongoose db
 mongoose.connect("mongodb://localhost/react-shopping-cart-db",{
     useNewUrlParser: true,

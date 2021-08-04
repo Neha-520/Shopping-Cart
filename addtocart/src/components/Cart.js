@@ -68,6 +68,10 @@ function Cart(props) {
                     <div>{props.order.address}</div>
                   </li>
                   <li>
+                    <div>Date:</div>
+                    <div>{props.order.createdAt}</div>
+                  </li>
+                  <li>
                     <div>Total:</div>
                     <div>{`Rs. ${props.order.total}`}</div>
                   </li>
@@ -117,7 +121,7 @@ function Cart(props) {
               Total:{` Rs `}
               {props.cartItems.reduce((a, c) => a + c.price * c.count, 0)}
             </div>
-            <button onClick={() => { setState({...state,showCheckout: true }) }} className="button primary"> Proceed</button>
+            <button onClick={() => { setState({showCheckout: true }) }} className="button primary"> Proceed</button>
           </div>
             {state.showCheckout && (
           <div className="cart">

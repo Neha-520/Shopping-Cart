@@ -6,13 +6,22 @@ const shortId = require("shortId");
 const app = express(); //created webserver using express by running express as function
 // app.use(bodyParser.json()); //used to parse post requests
 app.use(express.json());
+
 //initialized mongoose db
-mongoose.connect("mongodb://localhost/react-shopping-cart-db",{
+// mongoose.connect("mongodb://localhost/react-shopping-cart-db",{
+//     useNewUrlParser: true,
+//     useCreateIndex : true,
+//     useUnifiedTopology : true,
+// });
+// 1st param is the url of connection to mongo db and 2nd parameter is for better connection to db
+
+mongoose.connect(`mongodb+srv://neha:nisekoi@cluster0.izsgo.mongodb.net/cart?retryWrites=true&w=majority`,{
     useNewUrlParser: true,
     useCreateIndex : true,
     useUnifiedTopology : true,
-});
-// 1st param is the url of connection to mongo db and 2nd parameter is for better connection to db
+}).then(
+    console.log("database connected")
+).catch(error => console.log(error));
 
 //define model
 const Product = mongoose.model("products", new mongoose.Schema({

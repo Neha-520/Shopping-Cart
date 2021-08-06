@@ -14,7 +14,7 @@ function Cart(props) {
     address:"",
     showCheckout: false,
   })
-  
+
   const order={
     name:state.name,
     email:state.email,
@@ -34,6 +34,11 @@ function Cart(props) {
 
   const closeModal = () => {
     props.clearOrder();
+    setState({ name:"",
+    email:"",
+    address:"",
+    showCheckout: false,});
+    localStorage.clear("cartItems");
   };
 
   return (

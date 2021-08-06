@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Modal from "react-modal"
 import Zoom from 'react-reveal/Zoom'
+import Fade from "react-reveal/Fade";
 import { removeFromCart } from '../actions/cartActions'
 import {createOrder,clearOrder} from '../actions/orderActions'
 
@@ -93,6 +94,7 @@ function Cart(props) {
       </div>
       <div>
         <div className="cart">
+        <Fade left cascade>
           <ul className="cart-items">
             {
               props.cartItems.map(i => (
@@ -113,6 +115,7 @@ function Cart(props) {
             }
 
           </ul>
+          </Fade>
         </div>
         {props.cartItems.length !== 0 && (
           <div>
@@ -124,6 +127,7 @@ function Cart(props) {
             <button onClick={() => { setState({showCheckout: true }) }} className="button primary"> Proceed</button>
           </div>
             {state.showCheckout && (
+              <Fade right cascade>
           <div className="cart">
             <form onSubmit={createOrder}>
               <ul className="form-container">
@@ -145,6 +149,7 @@ function Cart(props) {
               </ul>
             </form>
           </div>
+          </Fade>
         )} 
         </div>
            )}

@@ -12,8 +12,8 @@ const [state, setstate] = useState({
 
 useEffect(() => {
  props.fetchProducts();
- 
-},[props]);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+},[]);
 
 const openModal = (product) =>{
   setstate({product});

@@ -14,6 +14,14 @@ function Cart(props) {
     address:"",
     showCheckout: false,
   })
+  
+  const order={
+    name:state.name,
+    email:state.email,
+    address:state.address,
+    cartItems: props.cartItems,
+    total: props.cartItems.reduce((a,c) => a + c.price * c.count,0),
+  };
 
   const handleInput =(e)=>{
     setState({ ...state, [e.target.name]: e.target.value })
@@ -21,13 +29,6 @@ function Cart(props) {
 
   const createOrder =(e)=>{
     e.preventDefault();
-    const order={
-      name:state.name,
-      email:state.email,
-      address:state.address,
-      cartItems: props.cartItems,
-      total: props.cartItems.reduce((a,c) => a + c.price * c.count,0),
-    };
     props.createOrder(order);
   }
 

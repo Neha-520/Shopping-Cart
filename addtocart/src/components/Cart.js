@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Modal from "react-modal"
 import Zoom from 'react-reveal/Zoom'
 import Fade from "react-reveal/Fade";
-import { removeFromCart } from '../actions/cartActions'
+import { removeFromCart,clearCart} from '../actions/cartActions'
 import {createOrder,clearOrder} from '../actions/orderActions'
 
 function Cart(props) {
@@ -39,6 +39,7 @@ function Cart(props) {
     address:"",
     showCheckout: false,});
     localStorage.clear("cartItems");
+    props.clearCart();
   };
 
   return (
@@ -169,5 +170,5 @@ export default connect((state) =>({
   order: state.order.order,
   cartItems: state.cart.cartItems,
 }),
-{removeFromCart,createOrder,clearOrder})
+{removeFromCart,createOrder,clearOrder,clearCart})
 (Cart);

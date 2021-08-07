@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Modal from 'react-modal'
 import Zoom from "react-reveal/Zoom"
+import Fade from "react-reveal/Fade"
 import {connect} from "react-redux";
 import {fetchProducts} from '../actions/productActions'
 import {addToCart} from '../actions/cartActions';
@@ -27,7 +28,7 @@ const closeModal =()=>{
     return (
         <>
         <div>
-        
+        <Fade bottom cascade>
             {!props.products ? (
                 <div> Loading...</div> 
                 ) :( 
@@ -55,7 +56,7 @@ const closeModal =()=>{
              ))}
            </ul> 
            )}      
-           
+           </Fade>
            { state.product && (
              <Modal isOpen={true} onRequestClose={closeModal}>
                 <Zoom>

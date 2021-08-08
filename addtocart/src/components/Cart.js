@@ -77,7 +77,7 @@ function Cart(props) {
                   </li>
                   <li>
                     <div>Date:</div>
-                    <div>{props.order.createdAt}</div>
+                    <div>{new Date(props.order.createdAt).toDateString()}</div>
                   </li>
                   <li>
                     <div>Total:</div>
